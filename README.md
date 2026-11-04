@@ -1,26 +1,49 @@
-# Moje portfólio — začiatok 👋
+# 📦 LogiFix — B2B Portál pre manažment logistických incidentov
 
-Vitaj! Toto je tvoj štartový projekt pre predmet **Návrh a tvorba webových stránok**. Máš tu pripravené všetko, čo potrebuješ — nič neinštaluješ.
+> **Semestrálny projekt v rámci predmetu Návrh a tvorba webových stránok**  
+> **Univerzita:** Žilinská univerzita v Žiline (UNIZA)  
+> **Fakulta:** FPEDAS (Distribučné technológie a služby)  
+> **Vyučujúci:** Ing. Juraj Fabuš, PhD.  
+> **Autor:** Artem Shapovalov  
 
-## Ako začať
+---
 
-1. **Spusti si prostredie.** Ak čítaš toto priamo na GitHube, klikni zelené tlačidlo **`< > Code`** → záložka **Codespaces** → **Create codespace on main**. Po chvíli sa otvorí VS Code v prehliadači.
-2. **Otvor AI asistenta.** Vpravo klikni na ikonu **Copilot Chat** — sem budeš písať, čo chceš vytvoriť.
-3. **Pozri si svoj web.** Klikni pravým tlačidlom na súbor `index.html` → **Show Preview** (alebo *Open with Live Preview*). Otvorí sa živý náhľad, ktorý sa sám obnovuje.
-4. **Postupuj podľa predmetu** — začni **Blokom 6**.
+## 📋 O projekte
 
-## Čo tu nájdeš
+**LogiFix** je B2B webový portál navrhnutý pre centralizáciu, evidenciu a rýchle riešenie logistických incidentov (poškodené zásielky, meškanie doručenia, nesprávny tovar) medzi distribútormi a odberateľmi. 
 
-| Súbor / priečinok | Na čo je |
-| ----------------- | -------- |
-| `index.html` | Tvoja hlavná stránka — jej **obsah** (zatiaľ len úvodná — čoskoro ju nahradíš svojím portfóliom). |
-| `styles.css` | **Vzhľad** stránky — farby, písmo, rozloženie (vrstva CSS). |
-| `docs/` | Sem sa uloží tvoj **style guide** (dizajnová referencia z Bloku 6) a neskôr tvoj **design brief** (`zadanie-webu.md`, Blok 11). |
-| `img/` | Sem si budeš dávať **obrázky a fotky** (napr. do portfólia v Bloku 7). |
-| `.gitignore` | Hovorí gitu, čo sa **nikdy** nesmie zverejniť — napríklad súbor `.env` s tajnými kľúčmi. |
+Systém nahrádza neprehľadnú e-mailovú komunikáciu a telefonáty, čím skracuje čas riešenia požiadaviek a zabraňuje prekročeniu SLA limitov.
 
-> **Poznámka:** Nemusíš rozumieť každému súboru. Dôležité je vedieť, že **`index.html` je tvoja stránka** a **do `img/` patria obrázky**. Zvyšok za teba spraví AI.
+---
 
-## Dôležité o bezpečnosti
+## 🚀 Kľúčové funkcie (MVP)
 
-Tento projekt bude časom **verejný** (aby si web mohol dať online). Preto sem **nikdy nedávaj skutočné heslá ani platobné kľúče**. V kurze používame len bezcenné cvičné kľúče — viac v znalostnej báze *Bezpečnosť kľúčov*.
+- **Dashboard s KPI kartami:** Okamžitý prehľad o počte kritických incidentov, požiadaviek po SLA, čakajúcich a doručených zásielok.
+- **Tabuľka incidentov:** Prehľadný zoznam s farebným odlíšením priorít a živým SLA časovačom.
+- **Modálne okno pre nový incident:** Rýchle nahlásenie problému s možnosťou priloženia fotodokumentácie poškodeného tovaru.
+- **Responzívny dizajn:** Plná podpora pre desktop aj mobilné zariadenia.
+
+---
+
+## 🎨 Vizuálna identita a Style Guide (Blok 6)
+
+- **Primárna farba:** Tmavomodrá (`#0F172A` / `#1E293B`) — korporátny B2B vzhľad.
+- **Akcentová farba:** Modrá (`#2563EB`) — tlačidlá a aktívne prvky.
+- **Semaforový systém pre SLA:**
+  - 🔴 **Kritický stav / Po SLA:** `#EF4444` / `#F97316`
+  - 🟡 **Čakajúci stav:** `#F59E0B`
+  - 🟢 **Vyriešené / Doručené:** `#10B981`
+- **Typografia:** Inter / System UI, optimalizované pre čitateľnosť dát.
+s
+---
+
+## 📁 Štruktúra repozitára
+
+```text
+logifix-b2b/
+├── index.html        # Hlavná stránka / Dashboard LogiFix
+├── styles.css        # Štýly a CSS premenné (Style Guide)
+├── script.js        # Interaktivita (modálne okno, SLA časovač)
+├── docs/             # Dokumentácia a Design brief (Blok 1 – 5)
+├── img/              # Náhľady a fotky papierových prototypov
+└── README.md         # Dokumentácia repozitára
