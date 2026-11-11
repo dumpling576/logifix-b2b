@@ -79,23 +79,31 @@
                 <th>Akcia</th>
               </tr>
             </thead>
-            <tbody id="incidentTableBody">
-              <tr class="row-critical">
-                <td><strong>#2091</strong></td>
-                <td>LogiExpress s.r.o.</td>
-                <td><span class="badge badge-critical">Kritické</span></td>
-                <td><span class="sla-timer critical">⏱ 2,2 min!</span></td>
-                <td><button class="btn-sm">Detail</button></td>
-              </tr>
-              <tr class="row-pending">
-                <td><strong>#2092</strong></td>
-                <td>TransSk a.s.</td>
-                <td><span class="badge badge-pending">Čakajúce</span></td>
-                <td><span class="sla-timer warning">⏱ 28 min</span></td>
-                <td><button class="btn-sm">Detail</button></td>
-              </tr>
-            </tbody>
+            <tbody id="incidentTableBody"></tbody>
           </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="contact-section">
+      <div class="contact-content">
+        <span class="contact-eyebrow">Spojme sa</span>
+        <h2>Kontaktujte LogiFix</h2>
+        <p>
+          Máte otázky o správe logistických incidentov alebo monitorovaní SLA?
+          Sledujte nás na sociálnych sieťach a zostaňte v obraze o novinkách
+          a možnostiach LogiFix B2B.
+        </p>
+        <div class="social-links" role="group" aria-label="Sociálne siete">
+          <a class="social-icon" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2v-2c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.3v3.2h2.8V21h3.4Z"/></svg>
+          </a>
+          <a class="social-icon" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="social-dot" cx="17.5" cy="6.8" r="1"/></svg>
+          </a>
+          <a class="social-icon" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 8.5a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6ZM3.7 10h3v10h-3V10Zm5 0h2.9v1.4h.1c.4-.8 1.4-1.7 2.9-1.7 3.1 0 3.7 2 3.7 4.6V20h-3v-5.1c0-1.2 0-2.7-1.7-2.7s-2 1.3-2 2.6V20h-3V10Z"/></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -141,30 +149,53 @@
     </div>
   </div>
 
+  <div class="modal-overlay" id="detailModal" aria-hidden="true">
+    <section class="modal-content detail-modal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <div class="modal-header">
+        <h3 id="detailTitle">Detail incidentu</h3>
+        <button type="button" class="close-btn" id="closeDetailBtn" aria-label="Zavrieť detail">&times;</button>
+      </div>
+      <dl class="incident-details">
+        <div><dt>ID incidentu</dt><dd id="detailId"></dd></div>
+        <div><dt>Klient / zásielka</dt><dd id="detailShipment"></dd></div>
+        <div><dt>Priorita</dt><dd id="detailPriority"></dd></div>
+        <div><dt>SLA časovač</dt><dd id="detailTimer"></dd></div>
+        <div class="detail-description"><dt>Popis problému</dt><dd id="detailDescription"></dd></div>
+      </dl>
+      <div class="modal-actions">
+        <button type="button" class="btn-danger" id="deleteIncidentBtn">Odstrániť</button>
+        <button type="button" class="btn-primary" id="editIncidentBtn">Upraviť</button>
+      </div>
+    </section>
+  </div>
 
-    <!-- Footer -->
-  <footer class="site-footer text-center text-white">
-    <!-- Grid container -->
-    <div class="container p-4">
-      <!-- Section: Text -->
-      <section class="mb-4">
+  <div class="modal-overlay" id="deleteConfirmModal" aria-hidden="true">
+    <section class="modal-content confirm-modal" role="alertdialog" aria-modal="true" aria-labelledby="deleteConfirmTitle" aria-describedby="deleteConfirmMessage">
+      <div class="modal-header">
+        <h3 id="deleteConfirmTitle">Odstrániť incident?</h3>
+      </div>
+      <p id="deleteConfirmMessage">Naozaj chcete natrvalo odstrániť tento incident?</p>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" id="cancelDeleteBtn">Zrušiť</button>
+        <button type="button" class="btn-danger" id="confirmDeleteBtn">Odstrániť incident</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer text-white">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <span class="footer-logo">📦 LogiFix B2B</span>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-          distinctio earum repellat quaerat voluptatibus placeat nam,
-          commodi optio pariatur est quia magnam eum harum corrupti dicta,
-          aliquam sequi voluptate quas.
+          Centralizovaný B2B portál pre efektívnu evidenciu, správu a riešenie logistických incidentov, monitorovanie SLA a koordináciu tímov v reálnom čase. Naša platforma pomáha rýchlo reagovať na poškodenia zásielok, meškania doručenia, nahlásenia zákazníkov a zlyhania v distribučnom procese. Každý incident je jasne zmapovaný, priradený a sledovaný až do jeho vyriešenia.
         </p>
-      </section>
-      <!-- Section: Text -->
+      </div>
     </div>
-    <!-- Grid container -->
 
-    <!-- Copyright -->
-    <div class="footer-bottom text-center p-3">
-      © 2025 Copyright:
-      <a class="text-white" href="#">LogiFix B2B</a>
+    <div class="footer-bottom text-center">
+      © 2025 LogiFix B2B. Všetky práva vyhradené.
     </div>
-    <!-- Copyright -->
   </footer>
   <!-- Footer -->
   <!-- Skript zapísaný na konci pred koncom body -->

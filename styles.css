@@ -150,6 +150,93 @@ body {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
+.contact-section {
+  margin-top: 2rem;
+  padding: 3rem 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  scroll-margin-top: 6rem;
+}
+
+.contact-content {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-eyebrow {
+  color: var(--blue-primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact-content h2 {
+  color: var(--navy-dark);
+  font-size: 2rem;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.contact-content p {
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 1.4rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.social-icon {
+  display: inline-flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background-color: white;
+  color: var(--navy-header);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+  text-decoration: none;
+  transition: color 0.2s, background-color 0.2s, transform 0.2s;
+}
+
+.social-icon:hover,
+.social-icon:focus-visible {
+  color: white;
+  background-color: var(--blue-primary);
+  transform: translateY(-2px);
+}
+
+.social-icon:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+.social-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: currentColor;
+}
+
+.social-icon[aria-label="Instagram"] svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+
+.social-icon .social-dot {
+  fill: currentColor;
+  stroke: none;
+}
+
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -225,6 +312,7 @@ body {
 .sla-timer { font-weight: 700; font-size: 0.85rem; }
 .sla-timer.critical { color: var(--color-critical); }
 .sla-timer.warning  { color: var(--color-warning); }
+.sla-timer.overdue { color: #B91C1C; }
 
 /* Modálne okno */
 .modal-overlay {
@@ -246,6 +334,65 @@ body {
   max-width: 480px;
   padding: 1.5rem;
   border-radius: 10px;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.detail-modal {
+  max-width: 560px;
+}
+
+.confirm-modal {
+  max-width: 420px;
+}
+
+.confirm-modal p {
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.incident-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.incident-details > div {
+  min-width: 0;
+  padding: 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: #F8FAFC;
+}
+
+.incident-details .detail-description {
+  grid-column: 1 / -1;
+}
+
+.incident-details dt {
+  margin-bottom: 0.3rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.incident-details dd {
+  color: var(--navy-dark);
+  overflow-wrap: anywhere;
+}
+
+.btn-danger {
+  padding: 0.6rem 1.2rem;
+  border: 0;
+  border-radius: 6px;
+  background: var(--color-critical);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background: #DC2626;
 }
 
 .modal-header {
@@ -287,34 +434,49 @@ body {
 }
 
 .site-footer {
-  background-color: var(--navy-dark);
+  background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
   color: white;
   margin-top: 3rem;
+  width: 100%;
   border-top: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 -10px 30px rgba(15, 23, 42, 0.12);
 }
 
 .site-footer .container {
-  max-width: 1200px;
+  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 3rem 1.5rem 2rem;
 }
 
-.site-footer .mb-4 {
-  max-width: 700px;
-  margin: 0 auto 1rem;
+.footer-container {
+  display: block;
+  max-width: 100%;
+}
+
+.footer-logo {
+  display: inline-block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.9rem;
+  color: #f8fafc;
 }
 
 .site-footer p {
-  color: rgba(255, 255, 255, 0.8);
-  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.8;
+  font-size: 1.02rem;
   margin: 0;
+  max-width: 100%;
 }
 
 .footer-bottom {
   background-color: rgba(2, 6, 23, 0.35);
-  padding: 1rem 1.5rem;
-  color: white;
+  padding: 1.1rem 1.5rem;
+  color: rgba(255, 255, 255, 0.88);
   text-align: center;
+  letter-spacing: 0.01em;
 }
 
 .site-footer .text-white {
@@ -324,6 +486,20 @@ body {
 
 .site-footer .text-white:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .site-footer .container {
+    padding-top: 2.25rem;
+  }
+
+  .footer-logo {
+    font-size: 1.25rem;
+  }
+
+  .site-footer p {
+    font-size: 0.97rem;
+  }
 }
 
 /* =================================================== */
@@ -369,6 +545,22 @@ body {
 
   .dashboard-section {
     padding: 1rem;
+  }
+
+  .incident-details {
+    grid-template-columns: 1fr;
+  }
+
+  .incident-details .detail-description {
+    grid-column: auto;
+  }
+
+  .contact-section {
+    padding: 2rem 1.25rem;
+  }
+
+  .contact-content h2 {
+    font-size: 1.7rem;
   }
 
   /* KPI Karty: 2 v riadku namiesto 4 */
