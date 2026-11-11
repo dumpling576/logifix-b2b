@@ -8,32 +8,140 @@
 </head>
 <body>
 
-  <!-- 1. Hlavička -->
-  <header>
-    <a href="#" class="logo">📦 LogiFix</a>
-    <nav>
-      <a href="#o-nas">O systéme</a>
-      <a href="#funkcie">Funkcie</a>
-      <a href="#demo">Demo</a>
-      <a href="#kontakt">Kontakt</a>
-      <a href="#demo" class="btn-primary">Vyskúšať Demo</a>
-    </nav>
+  <!-- 1. Hlavička (Header) s Hamburger tlačidlom pre mobily -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="logo">📦 LogiFix</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Otvoriť menu">☰</button>
+      <nav class="nav-menu" id="navMenu">
+        <a href="#o-nas">O systéme</a>
+        <a href="#funkcie">Funkcie</a>
+        <a href="#demo">Demo</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#demo" class="btn-primary btn-nav">Vyskúšať Demo</a>
+      </nav>
+    </div>
   </header>
 
   <!-- 2. Hero Sekcia -->
-  <main style="padding: 3rem 2rem; max-width: 1200px; margin: 0 auto;">
-    <section style="text-align: center; margin-bottom: 3rem;">
-      <h1 style="font-size: 2.5rem; color: var(--navy-dark); margin-bottom: 1rem;">
-        Rýchlejšie riešenie logistických incidentov o 40 %
-      </h1>
-      <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem;">
-        Centralizovaný B2B portál pre distribútorov a odberateľov, ktorý nahrádza chaotické e-maily a telefonáty.
-      </p>
-      <a href="#demo" class="btn-primary" style="font-size: 1.1rem; padding: 0.8rem 1.8rem;">
-        Otvoriť Demo Dashboard
-      </a>
+  <main class="main-content">
+    <section class="hero-section">
+      <h1>Rýchlejšie riešenie logistických incidentov o 40 %</h1>
+      <p>Centralizovaný B2B portál pre distribútorov a odberateľov, ktorý nahrádza chaotické e-maily a telefonáty.</p>
+      <a href="#demo" class="btn-primary btn-hero">Otvoriť Demo Dashboard</a>
+    </section>
+
+    <!-- 3. Demo Dashboard (Desktop & Mobile) -->
+    <section id="demo" class="dashboard-section">
+      <div class="dashboard-header">
+        <div>
+          <h2>Demo Dashboard logistu</h2>
+          <p class="subtitle">Prehľad aktívnych incidentov a SLA limitov v reálnom čase</p>
+        </div>
+        <button class="btn-primary" id="openModalBtn">+ Nový incident</button>
+      </div>
+
+      <!-- KPI Karty (Grid - 4 na PC, 2 na mobile) -->
+      <div class="kpi-grid">
+        <div class="kpi-card critical">
+          <span class="kpi-label">Kritické</span>
+          <span class="kpi-value">10</span>
+          <span class="kpi-sub">Vyžadujú okamžitú akciu</span>
+        </div>
+        <div class="kpi-card warning">
+          <span class="kpi-label">Po SLA</span>
+          <span class="kpi-value">32</span>
+          <span class="kpi-sub">Prekročený čas riešenia</span>
+        </div>
+        <div class="kpi-card pending">
+          <span class="kpi-label">Čakajúce</span>
+          <span class="kpi-value">9</span>
+          <span class="kpi-sub">V procese riešenia</span>
+        </div>
+        <div class="kpi-card success">
+          <span class="kpi-label">Doručené</span>
+          <span class="kpi-value">1</span>
+          <span class="kpi-sub">Dnes uzatvorené</span>
+        </div>
+      </div>
+
+      <!-- Tabuľka / Zoznam incidentov -->
+      <div class="table-section">
+        <h3>Zoznam incidentov</h3>
+        <div class="table-wrapper">
+          <table class="incident-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Klient / Partner</th>
+                <th>Stav</th>
+                <th>SLA časovač</th>
+                <th>Akcia</th>
+              </tr>
+            </thead>
+            <tbody id="incidentTableBody">
+              <tr class="row-critical">
+                <td><strong>#2091</strong></td>
+                <td>LogiExpress s.r.o.</td>
+                <td><span class="badge badge-critical">Kritické</span></td>
+                <td><span class="sla-timer critical">⏱ 2,2 min!</span></td>
+                <td><button class="btn-sm">Detail</button></td>
+              </tr>
+              <tr class="row-pending">
+                <td><strong>#2092</strong></td>
+                <td>TransSk a.s.</td>
+                <td><span class="badge badge-pending">Čakajúce</span></td>
+                <td><span class="sla-timer warning">⏱ 28 min</span></td>
+                <td><button class="btn-sm">Detail</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
   </main>
+
+  <!-- 4. Modálne okno (Pop-up nového incidentu) -->
+  <div class="modal-overlay" id="incidentModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Nahlásiť nový incident (Modal)</h3>
+        <button class="close-btn" id="closeModalBtn">&times;</button>
+      </div>
+      
+      <form id="incidentForm">
+        <div class="form-group">
+          <label for="shipmentCode">Číslo zásielky / Objednávky</label>
+          <input type="text" id="shipmentCode" placeholder="napr. ZAS-2026-99" required>
+        </div>
+
+        <div class="form-group">
+          <label for="issueType">Priorita incidentu</label>
+          <select id="issueType">
+            <option value="Kritické">🔴 Kritická (Poškodenie tovaru)</option>
+            <option value="Čakajúce">🟡 Stredná (Meškanie doručenia)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Popis problému</label>
+          <textarea id="description" rows="3" placeholder="Opíšte poškodenie alebo vzniknutý problém..." required></textarea>
+        </div>
+
+        <div class="form-group photo-upload-box">
+          <label for="photoInput">📷 Priložiť fotku / súbor (dôkaz poškodenia)</label>
+          <input type="file" id="photoInput" accept="image/*">
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="cancelBtn">Zrušiť</button>
+          <button type="submit" class="btn-primary">Vytvoriť incident</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Skript zapísaný na konci pred koncom body -->
   <script src="script.js"></script>
 </body>
 </html>

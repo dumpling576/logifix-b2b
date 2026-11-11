@@ -1,6 +1,5 @@
-/* LogiFix Style Guide - Blok 6 */
+/* Style Guide & Layout LogiFix B2B */
 :root {
-  /* Основные B2B цвета */
   --bg-main: #F8FAFC;
   --navy-dark: #0F172A;
   --navy-header: #1E293B;
@@ -10,11 +9,10 @@
   --text-muted: #64748B;
   --border-color: #E2E8F0;
 
-  /* Статусы SLA и приоритеты (Семафор) */
-  --status-critical: #EF4444; /* Красный */
-  --status-warning: #F97316;  /* Оранжевый */
-  --status-pending: #F59E0B;  /* Желтый */
-  --status-success: #10B981;  /* Зеленый */
+  --color-critical: #EF4444;
+  --color-warning: #F97316;
+  --color-pending: #F59E0B;
+  --color-success: #10B981;
 }
 
 * {
@@ -30,11 +28,19 @@ body {
   line-height: 1.5;
 }
 
-/* Шапка сайта */
-header {
+/* Header & Navigácia */
+.site-header {
   background-color: var(--navy-header);
   color: white;
-  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,50 +53,297 @@ header {
   text-decoration: none;
 }
 
-nav a {
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nav-menu a {
   color: #94A3B8;
   text-decoration: none;
-  margin-left: 1.5rem;
   font-size: 0.95rem;
+  transition: color 0.2s;
 }
 
-nav a:hover {
+.nav-menu a:hover {
   color: white;
 }
 
-/* Кнопки */
+/* Tlačidlá */
 .btn-primary {
   background-color: var(--blue-primary);
-  color: white;
+  color: white !important;
   padding: 0.6rem 1.2rem;
   border-radius: 6px;
   border: none;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s;
 }
 
 .btn-primary:hover {
   background-color: var(--blue-hover);
 }
 
-/* KPI Карточки */
-.kpi-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+.btn-secondary {
+  background-color: #E2E8F0;
+  color: var(--text-main);
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-sm {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Obsah a Hero */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 1rem;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  color: var(--navy-dark);
+  margin-bottom: 1rem;
+}
+
+.hero-section p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto 1.8rem;
+}
+
+/* Dashboard Section */
+.dashboard-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
   gap: 1rem;
-  margin: 2rem 0;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* KPI Karty */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .kpi-card {
-  background: white;
+  background: #F8FAFC;
   padding: 1.2rem;
   border-radius: 8px;
-  border-left: 5px solid var(--border-color);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border-left: 4px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
 }
 
-.kpi-card.critical { border-left-color: var(--status-critical); }
-.kpi-card.warning  { border-left-color: var(--status-warning); }
-.kpi-card.pending  { border-left-color: var(--status-pending); }
-.kpi-card.success  { border-left-color: var(--status-success); }
+.kpi-card.critical { border-left-color: var(--color-critical); }
+.kpi-card.warning  { border-left-color: var(--color-warning); }
+.kpi-card.pending  { border-left-color: var(--color-pending); }
+.kpi-card.success  { border-left-color: var(--color-success); }
+
+.kpi-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+.kpi-value { font-size: 1.8rem; font-weight: 800; margin: 0.2rem 0; }
+.kpi-sub { font-size: 0.75rem; color: var(--text-muted); }
+
+/* Tabuľka */
+.table-section h3 { margin-bottom: 1rem; }
+
+.table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.incident-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 600px; /* Garancia scrollu na mobiloch */
+}
+
+.incident-table th, .incident-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.incident-table th { background: #F1F5F9; font-size: 0.85rem; color: var(--text-muted); }
+
+.badge {
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.badge-critical { background: #FEE2E2; color: #991B1B; }
+.badge-pending  { background: #FEF3C7; color: #92400E; }
+
+.sla-timer { font-weight: 700; font-size: 0.85rem; }
+.sla-timer.critical { color: var(--color-critical); }
+.sla-timer.warning  { color: var(--color-warning); }
+
+/* Modálne okno */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(15, 23, 42, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-overlay.active { display: flex; }
+
+.modal-content {
+  background: white;
+  width: 100%;
+  max-width: 480px;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+
+.form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+  padding: 0.6rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.photo-upload-box {
+  background: #F8FAFC;
+  padding: 0.8rem;
+  border: 1px dashed #CBD5E1;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* =================================================== */
+/* 📱 ADAPTÍVNY DIZAJN PRE MOBILY (MEDIA QUERIES)      */
+/* =================================================== */
+@media (max-width: 768px) {
+  /* Zobraziť tlačidlo hamburger menu */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Mobilná navigácia (rozbalovacia) */
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--navy-header);
+    padding: 1.5rem;
+    gap: 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .btn-nav {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Upraviť fonty pre mobilný экран */
+  .hero-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .dashboard-section {
+    padding: 1rem;
+  }
+
+  /* KPI Karty: 2 v riadku namiesto 4 */
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-header .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+}
