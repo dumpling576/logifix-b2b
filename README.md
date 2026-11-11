@@ -4,7 +4,7 @@
 > **Univerzita:** Žilinská univerzita v Žiline (UNIZA)  
 > **Fakulta:** FPEDAS (Distribučné technológie a služby)  
 > **Vyučujúci:** Ing. Juraj Fabuš, PhD.  
-> **Autor:** Artem Shapovalov  
+> **Autor:** Anna Hubarenko  
 
 ---
 
@@ -34,7 +34,7 @@ Systém nahrádza neprehľadnú e-mailovú komunikáciu a telefonáty, čím skr
   - 🟡 **Čakajúci stav:** `#F59E0B`
   - 🟢 **Vyriešené / Doručené:** `#10B981`
 - **Typografia:** Inter / System UI, optimalizované pre čitateľnosť dát.
-s
+
 ---
 
 ## 📁 Štruktúra repozitára

@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const priorityInput = document.getElementById('issueType');
   const descriptionInput = document.getElementById('description');
   const tableBody = document.getElementById('incidentTableBody');
+
   const detailFields = {
     id: document.getElementById('detailId'),
     shipment: document.getElementById('detailShipment'),
@@ -26,9 +27,21 @@ document.addEventListener('DOMContentLoaded', () => {
     description: document.getElementById('detailDescription')
   };
 
+  const kpiFields = {
+    critical: document.getElementById('kpiCritical'),
+    warning: document.getElementById('kpiWarning'),
+    pending: document.getElementById('kpiPending'),
+    success: document.getElementById('kpiSuccess')
+  };
+
+  // 1. Mobilné hamburger menu
   if (menuToggle && navMenu) {
     menuToggle.addEventListener('click', () => {
       navMenu.classList.toggle('active');
+    });
+
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navMenu.classList.remove('active'));
     });
   }
 
@@ -50,20 +63,43 @@ document.addEventListener('DOMContentLoaded', () => {
       priority: 'Čakajúce',
       deadline: Date.now() + 28 * 60 * 1000,
       description: 'Meškanie doručenia – čaká sa na potvrdenie nového termínu.'
+    },
+    {
+      id: 2090,
+      shipment: 'DPD Direct',
+      priority: 'Doručené',
+      deadline: Date.now(),
+      description: 'Zásielka úspešne odovzdaná odberateľovi.'
     }
   ];
+
   let nextId = 2093;
   let selectedIncidentId = null;
   let editingIncidentId = null;
 
-  const priorityClass = (priority) => priority === 'Kritické' ? 'critical' : 'pending';
-  const timerClass = (priority) => priority === 'Kritické' ? 'critical' : 'warning';
-  const formatRemainingTime = (deadline) => {
+  const priorityClass = (priority) => {
+    if (priority === 'Kritické') return 'critical';
+    if (priority === 'Doručené') return 'success';
+    return 'pending';
+  };
+
+  const timerClass = (priority) => {
+    if (priority === 'Kritické') return 'critical';
+    if (priority === 'Doručené') return 'success';
+    return 'warning';
+  };
+
+  const formatRemainingTime = (deadline, priority) => {
+    if (priority === 'Doručené') {
+      return { expired: false, text: '✔ Vyriešené' };
+    }
+
     const remainingSeconds = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
     const hours = Math.floor(remainingSeconds / 3600);
     const minutes = Math.floor((remainingSeconds % 3600) / 60);
     const seconds = remainingSeconds % 60;
-    const twoDigits = (value) => String(value).padStart(2, '0');
+    const twoDigits = (val) => String(val).padStart(2, '0');
+
     return {
       expired: remainingSeconds === 0,
       text: hours > 0
@@ -72,23 +108,47 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   };
 
-  const updateTimers = () => {
+  const updateTimersAndKPIs = () => {
+    let criticalCount = 0;
+    let warningCount = 0;
+    let pendingCount = 0;
+    let successCount = 0;
+
     incidents.forEach((incident) => {
+      const remaining = formatRemainingTime(incident.deadline, incident.priority);
       const timer = tableBody.querySelector(`[data-timer-id="${incident.id}"]`);
-      const remaining = formatRemainingTime(incident.deadline);
-      if (timer) {
-        timer.textContent = remaining.expired
-          ? `⏱ Po SLA · ${remaining.text}`
-          : `⏱ ${remaining.text}`;
-        timer.classList.toggle('overdue', remaining.expired);
+
+      if (incident.priority === 'Kritické') criticalCount++;
+      else if (incident.priority === 'Čakajúce') pendingCount++;
+      else if (incident.priority === 'Doručené') successCount++;
+
+      if (remaining.expired && incident.priority !== 'Doručené') {
+        warningCount++;
       }
 
-      if (selectedIncidentId === incident.id) {
-        detailFields.timer.textContent = remaining.expired
-          ? `Po SLA · ${remaining.text}`
-          : remaining.text;
+      if (timer) {
+        if (incident.priority === 'Doručené') {
+          timer.textContent = '✔ Vyriešené';
+          timer.className = 'sla-timer success';
+        } else {
+          timer.textContent = remaining.expired
+            ? `⏱ Po SLA · ${remaining.text}`
+            : `⏱ ${remaining.text}`;
+          timer.classList.toggle('overdue', remaining.expired);
+        }
+      }
+
+      if (selectedIncidentId === incident.id && detailFields.timer) {
+        detailFields.timer.textContent = incident.priority === 'Doručené'
+          ? '✔ Vyriešené'
+          : (remaining.expired ? `Po SLA · ${remaining.text}` : remaining.text);
       }
     });
+
+    if (kpiFields.critical) kpiFields.critical.textContent = String(criticalCount);
+    if (kpiFields.warning) kpiFields.warning.textContent = String(warningCount);
+    if (kpiFields.pending) kpiFields.pending.textContent = String(pendingCount);
+    if (kpiFields.success) kpiFields.success.textContent = String(successCount);
   };
 
   const renderIncidents = () => {
@@ -96,7 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     incidents.forEach((incident) => {
       const row = document.createElement('tr');
-      row.classList.add(priorityClass(incident.priority) === 'critical' ? 'row-critical' : 'row-pending');
+      const pClass = priorityClass(incident.priority);
+      row.className = pClass === 'critical' ? 'row-critical' : (pClass === 'success' ? 'row-success' : 'row-pending');
 
       const idCell = document.createElement('td');
       const idLabel = document.createElement('strong');
@@ -108,7 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const priorityCell = document.createElement('td');
       const badge = document.createElement('span');
-      badge.className = `badge ${incident.priority === 'Kritické' ? 'badge-critical' : 'badge-pending'}`;
+
+      let badgeClass = 'badge-pending';
+      if (incident.priority === 'Kritické') badgeClass = 'badge-critical';
+      else if (incident.priority === 'Doručené') badgeClass = 'badge-success';
+
+      badge.className = `badge ${badgeClass}`;
       badge.textContent = incident.priority;
       priorityCell.append(badge);
 
@@ -129,7 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
       row.append(idCell, shipmentCell, priorityCell, timerCell, actionCell);
       tableBody.append(row);
     });
-    updateTimers();
+
+    updateTimersAndKPIs();
   };
 
   const closeIncidentModal = () => {
@@ -138,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     editingIncidentId = null;
     const title = modal.querySelector('.modal-header h3');
     const submitButton = form.querySelector('button[type="submit"]');
-    if (title) title.textContent = 'Nahlásiť nový incident (Modal)';
+    if (title) title.textContent = 'Nahlásiť nový incident';
     if (submitButton) submitButton.textContent = 'Vytvoriť incident';
   };
 
@@ -156,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     detailFields.description.textContent = incident.description;
     detailModal.classList.add('active');
     detailModal.setAttribute('aria-hidden', 'false');
-    updateTimers();
+    updateTimersAndKPIs();
   };
 
   const startEditingIncident = (incident) => {
@@ -164,10 +231,12 @@ document.addEventListener('DOMContentLoaded', () => {
     shipmentInput.value = incident.shipment;
     priorityInput.value = incident.priority;
     descriptionInput.value = incident.description;
+
     const title = modal.querySelector('.modal-header h3');
     const submitButton = form.querySelector('button[type="submit"]');
     if (title) title.textContent = `Upraviť incident #${incident.id}`;
     if (submitButton) submitButton.textContent = 'Uložiť zmeny';
+
     closeDetailModal();
     modal.classList.add('active');
   };
@@ -177,10 +246,11 @@ document.addEventListener('DOMContentLoaded', () => {
     form.reset();
     const title = modal.querySelector('.modal-header h3');
     const submitButton = form.querySelector('button[type="submit"]');
-    if (title) title.textContent = 'Nahlásiť nový incident (Modal)';
+    if (title) title.textContent = 'Nahlásiť nový incident';
     if (submitButton) submitButton.textContent = 'Vytvoriť incident';
     modal.classList.add('active');
   });
+
   closeBtn?.addEventListener('click', closeIncidentModal);
   cancelBtn?.addEventListener('click', closeIncidentModal);
   closeDetailBtn?.addEventListener('click', closeDetailModal);
@@ -232,20 +302,25 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
     const shipment = shipmentInput.value.trim();
     const description = descriptionInput.value.trim();
+    const priority = priorityInput.value;
+
     if (!shipment || !description) return;
 
     if (editingIncidentId !== null) {
       const incident = incidents.find((item) => item.id === editingIncidentId);
       if (!incident) return;
       incident.shipment = shipment;
-      incident.priority = priorityInput.value;
+      incident.priority = priority;
       incident.description = description;
     } else {
+      let deadlineMinutes = 30;
+      if (priority === 'Kritické') deadlineMinutes = 5;
+
       incidents.unshift({
         id: nextId++,
         shipment,
-        priority: priorityInput.value,
-        deadline: Date.now() + 30 * 60 * 1000,
+        priority,
+        deadline: Date.now() + deadlineMinutes * 60 * 1000,
         description
       });
     }
@@ -274,5 +349,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   renderIncidents();
-  window.setInterval(updateTimers, 1000);
+  window.setInterval(updateTimersAndKPIs, 1000);
 });

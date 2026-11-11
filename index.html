@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- 1. Hlavička (Header) s Hamburger tlačidlom pre mobily -->
+  <!-- 1. Hlavička s Hamburger tlačidlom pre mobily -->
   <header class="site-header">
     <div class="header-container">
       <a href="#" class="logo">📦 LogiFix</a>
@@ -23,15 +23,46 @@
     </div>
   </header>
 
-  <!-- 2. Hero Sekcia -->
   <main class="main-content">
+    
+    <!-- 2. Hero Sekcia -->
     <section class="hero-section">
       <h1>Rýchlejšie riešenie logistických incidentov o 40 %</h1>
       <p>Centralizovaný B2B portál pre distribútorov a odberateľov, ktorý nahrádza chaotické e-maily a telefonáty.</p>
       <a href="#demo" class="btn-primary btn-hero">Otvoriť Demo Dashboard</a>
     </section>
 
-    <!-- 3. Demo Dashboard (Desktop & Mobile) -->
+    <!-- 3. Sekcia: O systéme (Problém vs. Riešenie) -->
+    <section id="o-nas" class="info-section">
+      <span class="section-eyebrow">O systéme</span>
+      <h2>Centralizované riadenie logistiky</h2>
+      <p>
+        LogiFix nahradzuje neprehľadné e-mailové vlákna a zdĺhavé telefonáty jedným transparentným B2B portálom.
+        Umožňuje okamžitú evidenciu poškodených zásielok, meškaní a reklamácií s automatickým sledovaním SLA limitov.
+      </p>
+    </section>
+
+    <!-- 4. Sekcia: Kľúčové funkcie -->
+    <section id="funkcie" class="info-section">
+      <span class="section-eyebrow">Funkcie</span>
+      <h2>Hlavné výhody LogiFix B2B</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>⏱️ Živý SLA časovač</h3>
+          <p>Semaforový systém (červená / oranžová / zelená) okamžite upozorní na kritické incidenty pred prekročením termínu.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📷 Fotodokumentácia</h3>
+          <p>Možnosť rýchleho nahrani fotiek a súborov ako dôkazu poškodenia tovaru priamo pri nahlásení.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📊 KPI Dashboard</h3>
+          <p>Prehľadné karty a tabuľka pre dispečerov a manažérov pre okamžitý prehľad o stave logistiky.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Demo Dashboard (Desktop & Mobile) -->
     <section id="demo" class="dashboard-section">
       <div class="dashboard-header">
         <div>
@@ -41,31 +72,31 @@
         <button class="btn-primary" id="openModalBtn">+ Nový incident</button>
       </div>
 
-      <!-- KPI Karty (Grid - 4 na PC, 2 na mobile) -->
+      <!-- Dynamické KPI Karty -->
       <div class="kpi-grid">
         <div class="kpi-card critical">
           <span class="kpi-label">Kritické</span>
-          <span class="kpi-value">10</span>
+          <span class="kpi-value" id="kpiCritical">0</span>
           <span class="kpi-sub">Vyžadujú okamžitú akciu</span>
         </div>
         <div class="kpi-card warning">
           <span class="kpi-label">Po SLA</span>
-          <span class="kpi-value">32</span>
+          <span class="kpi-value" id="kpiWarning">0</span>
           <span class="kpi-sub">Prekročený čas riešenia</span>
         </div>
         <div class="kpi-card pending">
           <span class="kpi-label">Čakajúce</span>
-          <span class="kpi-value">9</span>
+          <span class="kpi-value" id="kpiPending">0</span>
           <span class="kpi-sub">V procese riešenia</span>
         </div>
         <div class="kpi-card success">
-          <span class="kpi-label">Doručené</span>
-          <span class="kpi-value">1</span>
-          <span class="kpi-sub">Dnes uzatvorené</span>
+          <span class="kpi-label">Doručené / Vyriešené</span>
+          <span class="kpi-value" id="kpiSuccess">0</span>
+          <span class="kpi-sub">Uzatvorené incidenty</span>
         </div>
       </div>
 
-      <!-- Tabuľka / Zoznam incidentov -->
+      <!-- Tabuľka incidentov -->
       <div class="table-section">
         <h3>Zoznam incidentov</h3>
         <div class="table-wrapper">
@@ -85,14 +116,14 @@
       </div>
     </section>
 
+    <!-- 6. Kontakt -->
     <section id="kontakt" class="contact-section">
       <div class="contact-content">
         <span class="contact-eyebrow">Spojme sa</span>
         <h2>Kontaktujte LogiFix</h2>
         <p>
           Máte otázky o správe logistických incidentov alebo monitorovaní SLA?
-          Sledujte nás na sociálnych sieťach a zostaňte v obraze o novinkách
-          a možnostiach LogiFix B2B.
+          Sledujte nás na sociálnych sieťach a zostaňte v obraze o novinkách.
         </p>
         <div class="social-links" role="group" aria-label="Sociálne siete">
           <a class="social-icon" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
@@ -107,13 +138,14 @@
         </div>
       </div>
     </section>
+
   </main>
 
-  <!-- 4. Modálne okno (Pop-up nového incidentu) -->
+  <!-- Modálne okno: Vytvoriť / Upraviť incident -->
   <div class="modal-overlay" id="incidentModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h3>Nahlásiť nový incident (Modal)</h3>
+        <h3>Nahlásiť nový incident</h3>
         <button class="close-btn" id="closeModalBtn">&times;</button>
       </div>
       
@@ -124,10 +156,11 @@
         </div>
 
         <div class="form-group">
-          <label for="issueType">Priorita incidentu</label>
+          <label for="issueType">Priorita / Stav incidentu</label>
           <select id="issueType">
             <option value="Kritické">🔴 Kritická (Poškodenie tovaru)</option>
             <option value="Čakajúce">🟡 Stredná (Meškanie doručenia)</option>
+            <option value="Doručené">🟢 Doručené / Vyriešené (Zelený incident)</option>
           </select>
         </div>
 
@@ -149,6 +182,7 @@
     </div>
   </div>
 
+  <!-- Modálne okno: Detail incidentu -->
   <div class="modal-overlay" id="detailModal" aria-hidden="true">
     <section class="modal-content detail-modal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
       <div class="modal-header">
@@ -169,6 +203,7 @@
     </section>
   </div>
 
+  <!-- Modálne okno: Potvrdenie odstránenia -->
   <div class="modal-overlay" id="deleteConfirmModal" aria-hidden="true">
     <section class="modal-content confirm-modal" role="alertdialog" aria-modal="true" aria-labelledby="deleteConfirmTitle" aria-describedby="deleteConfirmMessage">
       <div class="modal-header">
@@ -182,23 +217,44 @@
     </section>
   </div>
 
-  <!-- Footer -->
-  <footer class="site-footer text-white">
-    <div class="container footer-container">
-      <div class="footer-brand">
-        <span class="footer-logo">📦 LogiFix B2B</span>
-        <p>
-          Centralizovaný B2B portál pre efektívnu evidenciu, správu a riešenie logistických incidentov, monitorovanie SLA a koordináciu tímov v reálnom čase. Naša platforma pomáha rýchlo reagovať na poškodenia zásielok, meškania doručenia, nahlásenia zákazníkov a zlyhania v distribučnom procese. Každý incident je jasne zmapovaný, priradený a sledovaný až do jeho vyriešenia.
-        </p>
+  <!-- 7. Akademický Footer (UNIZA / FPEDAS) -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      
+      <div class="footer-col">
+        <h4 class="footer-logo">📦 LogiFix B2B</h4>
+        <p>Centralizovaný B2B portál pre efektívnu evidenciu, správu a riešenie logistických incidentov a monitoring SLA limitov v reálnom čase.</p>
       </div>
+
+      <div class="footer-col">
+        <h4>Rýchle odkazy</h4>
+        <ul class="footer-links">
+          <li><a href="#o-nas">O systéme</a></li>
+          <li><a href="#funkcie">Hlavné funkcie</a></li>
+          <li><a href="#demo">Demo Dashboard</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Akademický projekt</h4>
+        <ul class="footer-info">
+          <li><strong>Predmet:</strong> Návrh a tvorba webových stránok</li>
+          <li><strong>Univerzita:</strong> Žilinská univerzita v Žiline (UNIZA)</li>
+          <li><strong>Fakulta:</strong> FPEDAS</li>
+          <li><strong>Odbor:</strong> Distribučné technológie a služby (DTaS)</li>
+          <li><strong>Vyučujúci:</strong> Ing. Juraj Fabuš, PhD.</li>
+          <li><strong>Autor:</strong> Anna Hubarenko</li>
+        </ul>
+      </div>
+
     </div>
 
     <div class="footer-bottom text-center">
-      © 2025 LogiFix B2B. Všetky práva vyhradené.
+      © 2026 LogiFix B2B. Všetky práva vyhradené.
     </div>
   </footer>
-  <!-- Footer -->
-  <!-- Skript zapísaný na konci pred koncom body -->
+
   <script src="script.js"></script>
 </body>
 </html>
