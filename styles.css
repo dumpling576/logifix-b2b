@@ -286,6 +286,46 @@ body {
   margin-top: 1rem;
 }
 
+.site-footer {
+  background-color: var(--navy-dark);
+  color: white;
+  margin-top: 3rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.site-footer .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.site-footer .mb-4 {
+  max-width: 700px;
+  margin: 0 auto 1rem;
+}
+
+.site-footer p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.footer-bottom {
+  background-color: rgba(2, 6, 23, 0.35);
+  padding: 1rem 1.5rem;
+  color: white;
+  text-align: center;
+}
+
+.site-footer .text-white {
+  color: white !important;
+  text-decoration: none;
+}
+
+.site-footer .text-white:hover {
+  text-decoration: underline;
+}
+
 /* =================================================== */
 /* 📱 ADAPTÍVNY DIZAJN PRE MOBILY (MEDIA QUERIES)      */
 /* =================================================== */
