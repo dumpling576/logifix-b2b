@@ -61,3 +61,10 @@ Informačná architektúra vychádza z centrálneho uzla **LogiFix — B2B Web**
 ## BLOK 5: Interaktívny prototyp (Figma)
 
 Na základe informačnej architektúry a papierových skíc bol vo Figme vytvorený digitálny prototyp s tmavomodrou B2B farebnou paletou a semaforovým značením SLA priorít, ktorý prepája hlavný Dashboard s modálnym oknom pre tvorbu incidentu.
+
+---
+
+## Výsledná realizácia (Nasadenie projektu)
+
+- **Živá verzia webu (GitHub Pages):** [https://dumpling576.github.io/logifix-b2b/](https://dumpling576.github.io/logifix-b2b/)
+- **GitHub repozitár:** [https://github.com/dumpling576/logifix-b2b](https://github.com/dumpling576/logifix-b2b)
