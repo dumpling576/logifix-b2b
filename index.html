@@ -32,7 +32,7 @@
       <a href="#demo" class="btn-primary btn-hero">Otvoriť Demo Dashboard</a>
     </section>
 
-    <!-- 3. Sekcia: O systéme (Problém vs. Riešenie) -->
+    <!-- 3. Sekcia: O systéme -->
     <section id="o-nas" class="info-section">
       <span class="section-eyebrow">O systéme</span>
       <h2>Centralizované riadenie logistiky</h2>
@@ -42,22 +42,30 @@
       </p>
     </section>
 
-    <!-- 4. Sekcia: Kľúčové funkcie -->
+    <!-- 4. Sekcia: Kľúčové funkcie (4 Karty - 2x2 Grid) -->
     <section id="funkcie" class="info-section">
       <span class="section-eyebrow">Funkcie</span>
       <h2>Hlavné výhody LogiFix B2B</h2>
       <div class="features-grid">
         <div class="feature-card">
-          <h3>⏱️ Živý SLA časovač</h3>
+          <div class="feature-icon">⏱️</div>
+          <h3>Živý SLA časovač</h3>
           <p>Semaforový systém (červená / oranžová / zelená) okamžite upozorní na kritické incidenty pred prekročením termínu.</p>
         </div>
         <div class="feature-card">
-          <h3>📷 Fotodokumentácia</h3>
-          <p>Možnosť rýchleho nahrani fotiek a súborov ako dôkazu poškodenia tovaru priamo pri nahlásení.</p>
+          <div class="feature-icon">📷</div>
+          <h3>Fotodokumentácia</h3>
+          <p>Možnosť rýchleho nahrani fotiek a súborov ako dôkazu poškodenia tovaru priamo pri nahlásení incidentu.</p>
         </div>
         <div class="feature-card">
-          <h3>📊 KPI Dashboard</h3>
+          <div class="feature-icon">📊</div>
+          <h3>KPI Dashboard</h3>
           <p>Prehľadné karty a tabuľka pre dispečerov a manažérov pre okamžitý prehľad o stave logistiky.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Centralizovaný B2B Chat</h3>
+          <p>Priama komunikácia medzi distribútorom a odberateľom ku každej zásielke bez nutnosti zdĺhavých e-mailov.</p>
         </div>
       </div>
     </section>
@@ -65,11 +73,12 @@
     <!-- 5. Demo Dashboard (Desktop & Mobile) -->
     <section id="demo" class="dashboard-section">
       <div class="dashboard-header">
-        <div>
+        <div class="dashboard-title-group">
           <h2>Demo Dashboard logistu</h2>
           <p class="subtitle">Prehľad aktívnych incidentov a SLA limitov v reálnom čase</p>
         </div>
-        <button class="btn-primary" id="openModalBtn">+ Nový incident</button>
+        <!-- Tlačidlo umiestnené vpravo podľa papierového prototypu (Blok 4) -->
+        <button class="btn-primary btn-add-incident" id="openModalBtn">+ Nový incident</button>
       </div>
 
       <!-- Dynamické KPI Karty -->
@@ -116,25 +125,53 @@
       </div>
     </section>
 
-    <!-- 6. Kontakt -->
+    <!-- 6. Nový moderný Kontakt s redesigned sociálnymi sieťami -->
     <section id="kontakt" class="contact-section">
       <div class="contact-content">
         <span class="contact-eyebrow">Spojme sa</span>
-        <h2>Kontaktujte LogiFix</h2>
+        <h2>Kontaktujte LogiFix B2B</h2>
         <p>
           Máte otázky o správe logistických incidentov alebo monitorovaní SLA?
-          Sledujte nás na sociálnych sieťach a zostaňte v obraze o novinkách.
+          Náš tím podpory je vám k dispozícii.
         </p>
-        <div class="social-links" role="group" aria-label="Sociálne siete">
-          <a class="social-icon" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2v-2c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.3v3.2h2.8V21h3.4Z"/></svg>
-          </a>
-          <a class="social-icon" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle class="social-dot" cx="17.5" cy="6.8" r="1"/></svg>
-          </a>
-          <a class="social-icon" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 8.5a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6ZM3.7 10h3v10h-3V10Zm5 0h2.9v1.4h.1c.4-.8 1.4-1.7 2.9-1.7 3.1 0 3.7 2 3.7 4.6V20h-3v-5.1c0-1.2 0-2.7-1.7-2.7s-2 1.3-2 2.6V20h-3V10Z"/></svg>
-          </a>
+        
+        <div class="contact-details-grid">
+          <div class="contact-item">
+            <span class="contact-icon">✉️</span>
+            <div>
+              <strong>E-mail podpora</strong>
+              <p>support@logifix.sk</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div>
+              <strong>Sídlo / Univerzita</strong>
+              <p>UNIZA FPEDAS, Žilina</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-wrapper">
+          <span class="social-title">Sledujte nás na sociálnych sieťach</span>
+          <div class="social-links" role="group" aria-label="Sociálne siete">
+            
+            <a class="social-card facebook" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg class="social-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7.5v-3H10V9.69c0-2.47 1.47-3.83 3.72-3.83 1.08 0 2.2.19 2.2.19v2.42h-1.24c-1.23 0-1.61.76-1.61 1.54V12h2.73l-.44 3h-2.29v6.8c4.56-.93 8-4.96 8-9.8z"/>
+              </svg>
+              <span>Facebook</span>
+            </a>
+
+
+            <a class="social-card linkedin" href="https://www.linkedin.com/in/anna-hubarenko-8946aa366/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg class="social-svg" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+
+          </div>
         </div>
       </div>
     </section>
@@ -217,15 +254,13 @@
     </section>
   </div>
 
-  <!-- 7. Akademický Footer (UNIZA / FPEDAS) -->
+  <!-- 7. Akademický Footer (UNIZA FPEDAS) -->
   <footer class="site-footer">
     <div class="footer-container">
-      
       <div class="footer-col">
         <h4 class="footer-logo">📦 LogiFix B2B</h4>
         <p>Centralizovaný B2B portál pre efektívnu evidenciu, správu a riešenie logistických incidentov a monitoring SLA limitov v reálnom čase.</p>
       </div>
-
       <div class="footer-col">
         <h4>Rýchle odkazy</h4>
         <ul class="footer-links">
@@ -235,7 +270,6 @@
           <li><a href="#kontakt">Kontakt</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>Akademický projekt</h4>
         <ul class="footer-info">
@@ -247,9 +281,7 @@
           <li><strong>Autor:</strong> Anna Hubarenko</li>
         </ul>
       </div>
-
     </div>
-
     <div class="footer-bottom text-center">
       © 2026 LogiFix B2B. Všetky práva vyhradené.
     </div>
